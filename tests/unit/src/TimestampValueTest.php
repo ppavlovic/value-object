@@ -49,7 +49,7 @@ class TimestampValueTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('1523441442000', $timestampString->getMilliseconds());
     }
 
-    public function testFromTimestampValueMillis(): void
+    public function testFromTimestampValueMillis()
     {
         $timestamp = TimestampValue::fromTimestampValueMillis(new TimestampValueMilliSeconds(1748436857000));
         $this->assertEquals(1748436857, $timestamp->getValue());

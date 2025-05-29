@@ -64,7 +64,13 @@ class TimestampValue implements StringInterface, NumberInterface
         return (int) ($this->value * 1000);
     }
 
-    public static function fromTimestampValueMillis(TimestampValueMilliSeconds $timestampValue): TimestampValue
+    /**
+     * @param TimestampValueMilliSeconds $timestampValue
+     * @return TimestampValue
+     * @throws InvalidTimestampValueException
+     * @throws MissingTimestampValueException
+     */
+    public static function fromTimestampValueMillis(TimestampValueMilliSeconds $timestampValue)
     {
         return new self($timestampValue->getValue() / 1000);
     }

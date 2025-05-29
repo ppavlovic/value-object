@@ -38,17 +38,26 @@ class TimestampValueMilliSeconds implements StringInterface, NumberInterface
         return (string) $this->value;
     }
 
-    public function getValue(): int
+    /**
+     * @return int
+     */
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function getSeconds(): int
+    /**
+     * @return int
+     */
+    public function getSeconds()
     {
         return (int) ($this->value / 1000);
     }
 
-    public function getFormatted(): string
+    /**
+     * @return string
+     */
+    public function getFormatted()
     {
         $seconds = (int) ($this->value / 1000);
         $milliseconds = $this->value % 1000;
@@ -56,17 +65,32 @@ class TimestampValueMilliSeconds implements StringInterface, NumberInterface
         return date('Y-m-d H:i:s', $seconds) . '.' . $millisecondsPadded;
     }
 
-    public static function fromTimestampValue(TimestampValue $timestampValue): TimestampValueMilliSeconds
+    /**
+     * @param TimestampValue $timestampValue
+     * @return self
+     * @throws InvalidTimestampValueException
+     * @throws MissingTimestampValueException
+     */
+    public static function fromTimestampValue(TimestampValue $timestampValue)
     {
         return new self($timestampValue->getValue() * 1000);
     }
 
-    public static function now(): TimestampValueMilliSeconds
+    /**
+     * @return self
+     * @throws InvalidTimestampValueException
+     * @throws MissingTimestampValueException
+     */
+    public static function now()
     {
         return new self((int) (microtime(true) * 1000));
     }
 
-    public static function isValid($timestamp): bool
+    /**
+     * @param $timestamp
+     * @return bool
+     */
+    public static function isValid($timestamp)
     {
 
         if (strlen((string) $timestamp) < self::MILLISECONDS_MIN_LENGTH
