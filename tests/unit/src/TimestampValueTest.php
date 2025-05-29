@@ -3,6 +3,7 @@
 use G4\ValueObject\TimestampValue;
 use G4\ValueObject\Exception\MissingTimestampValueException;
 use G4\ValueObject\Exception\InvalidTimestampValueException;
+use G4\ValueObject\TimestampValueMilliSeconds;
 
 class TimestampValueTest extends \PHPUnit\Framework\TestCase
 {
@@ -46,5 +47,11 @@ class TimestampValueTest extends \PHPUnit\Framework\TestCase
     {
         $timestampString = new TimestampValue('1523441442');
         $this->assertEquals('1523441442000', $timestampString->getMilliseconds());
+    }
+
+    public function testFromTimestampValueMillis(): void
+    {
+        $timestamp = TimestampValue::fromTimestampValueMillis(new TimestampValueMilliSeconds(1748436857000));
+        $this->assertEquals(1748436857, $timestamp->getValue());
     }
 }
