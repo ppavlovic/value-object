@@ -65,6 +65,17 @@ class TimestampValue implements StringInterface, NumberInterface
     }
 
     /**
+     * @param TimestampValueMilliSeconds $timestampValue
+     * @return TimestampValue
+     * @throws InvalidTimestampValueException
+     * @throws MissingTimestampValueException
+     */
+    public static function fromTimestampValueMillis(TimestampValueMilliSeconds $timestampValue)
+    {
+        return new self($timestampValue->getValue() / 1000);
+    }
+
+    /**
      * @param $timestamp
      * @return bool
      */
