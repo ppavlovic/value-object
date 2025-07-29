@@ -31,7 +31,7 @@ class Dictionary
     }
 
     /**
-     * @param array ...$keys
+     * @param string|int ...$keys
      * @return Dictionary
      */
     public function remove(...$keys)
@@ -90,7 +90,7 @@ class Dictionary
     }
 
     /**
-     * @param array ...$keys
+     * @param string|int ...$keys
      * @return array|mixed|null
      */
     public function getFromDeeperLevels(...$keys)
@@ -135,7 +135,7 @@ class Dictionary
     }
 
     /**
-     * @param array ...$keys
+     * @param string|int ...$keys
      * @return bool
      */
     public function hasInDeeperLevels(...$keys)
