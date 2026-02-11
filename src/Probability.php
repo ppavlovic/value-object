@@ -57,7 +57,10 @@ class Probability extends IntegerNumber
 
             foreach ($possibilities->getAll() as $returnValue => $probability) {
                 if ($probability < 0) {
-                    throw new InvalidProbabilityOutcomeException($this->getValue(), json_encode($possibilities->getAll()));
+                    throw new InvalidProbabilityOutcomeException(
+                        $this->getValue(),
+                        json_encode($possibilities->getAll())
+                    );
                 }
                 if ($probability > 0) {
                     $chances = $chances + array_fill(count($chances), $probability, $returnValue);
@@ -68,7 +71,10 @@ class Probability extends IntegerNumber
             if (count($chances) < 101) {
                 $fillCount = 100 - $probabilityTotal;
                 if ($fillCount < 0) {
-                    throw new InvalidProbabilityOutcomeException($this->getValue(), json_encode($possibilities->getAll()));
+                    throw new InvalidProbabilityOutcomeException(
+                        $this->getValue(),
+                        json_encode($possibilities->getAll())
+                    );
                 }
                 if ($fillCount > 0) {
                     $chances = $chances + array_fill(count($chances), $fillCount, 0);
@@ -78,7 +84,6 @@ class Probability extends IntegerNumber
             $retunValueSelected = $chances[$this->getValue()];
 
             return $retunValueSelected;
-
         } catch (InvalidProbabilityOutcomeException $e) {
             throw $e;
         } catch (\Exception $e) {
