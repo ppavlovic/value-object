@@ -52,24 +52,40 @@ class Probability extends IntegerNumber
     public function getOutcome(Dictionary $possibilities)
     {
         try {
-            $chances = [];
+            $chances = [0 => null]; // Start with index 0 unused, so array indices match probability values 1-100
             $probabilityTotal = 0;
 
             foreach ($possibilities->getAll() as $returnValue => $probability) {
-                $chances = $chances + array_fill(count($chances), $probability, $returnValue);
+                if ($probability < 0) {
+                    throw new InvalidProbabilityOutcomeException(
+                        $this->getValue(),
+                        json_encode($possibilities->getAll())
+                    );
+                }
+                if ($probability > 0) {
+                    $chances = $chances + array_fill(count($chances), $probability, $returnValue);
+                }
                 $probabilityTotal += $probability;
             }
 
-            if (count($chances) < 100) {
-                $chances = $chances + array_fill(count($chances), 100 - $probabilityTotal, 0);
+            if (count($chances) < 101) {
+                $fillCount = 100 - $probabilityTotal;
+                if ($fillCount < 0) {
+                    throw new InvalidProbabilityOutcomeException(
+                        $this->getValue(),
+                        json_encode($possibilities->getAll())
+                    );
+                }
+                if ($fillCount > 0) {
+                    $chances = $chances + array_fill(count($chances), $fillCount, 0);
+                }
             }
-
-            shuffle($chances);
 
             $retunValueSelected = $chances[$this->getValue()];
 
             return $retunValueSelected;
-
+        } catch (InvalidProbabilityOutcomeException $e) {
+            throw $e;
         } catch (\Exception $e) {
             throw new InvalidProbabilityOutcomeException($this->getValue(), json_encode($possibilities->getAll()));
         }
