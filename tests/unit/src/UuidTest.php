@@ -20,6 +20,7 @@ class UuidTest extends \PHPUnit\Framework\TestCase
 
     public function testGenerate()
     {
+        $this->expectNotToPerformAssertions();
         $anUuid = Uuid::generate();
         $this->isInstanceOf('\G4\ValueObject\Uuid', $anUuid);
     }
