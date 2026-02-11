@@ -62,7 +62,7 @@ class DomainName implements StringInterface
     public function getFirstLevelDomainName()
     {
         // todo after migrating to php7 introduce jeremykendall/php-domain-parser
-        $domain = preg_replace('#^(?:.+?\\.)+(.+?\\.(?:at|au|ca|ch|chat|co|com|de|dk|es|fr|fi|it|net|no|org|online|pt|rs|se|co\\.uk))#', '$1', $this->__toString());
+        $domain = preg_replace('#^(?:.+?\\.)+(.+?\\.(?:at|au|ca|ch|chat|co|com|de|dk|es|fr|fi|it|net|no|org|online|pt|rs|se|co\\.uk))#', '$1', $this->__toString()); // phpcs:ignore
 
         return new self($domain);
     }
@@ -116,7 +116,7 @@ class DomainName implements StringInterface
     {
         return \is_string($value)
             && preg_match(
-                '/^(?!\-)(?:[a-zA-zÀ-ÖØ-öø-ÿ\d\-]{0,62}[a-zA-zÀ-ÖØ-öø-ÿ\d]\.){1,126}(?!\d+)[a-zA-zÀ-ÖØ-öø-ÿ\d]{1,63}$/uxis',
+                '/^(?!\-)(?:[a-zA-zÀ-ÖØ-öø-ÿ\d\-]{0,62}[a-zA-zÀ-ÖØ-öø-ÿ\d]\.){1,126}(?!\d+)[a-zA-zÀ-ÖØ-öø-ÿ\d]{1,63}$/uxis', // phpcs:ignore
                 $value
             ) === 1;
     }
