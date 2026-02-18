@@ -109,4 +109,16 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         $url = new Url('http://example.com');
         $this->assertEquals('https://example.com', (string) $url->scheme('https'));
     }
+
+    public function testWithNullValue()
+    {
+        $this->expectException(InvalidUrlException::class);
+        new Url(null);
+    }
+
+    public function testWithEmptyString()
+    {
+        $this->expectException(InvalidUrlException::class);
+        new Url('');
+    }
 }

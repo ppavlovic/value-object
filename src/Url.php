@@ -66,7 +66,7 @@ class Url implements StringInterface
      */
     public function path(...$values)
     {
-        $this->path = join(self::FORWARD_SLASH, $values);
+        $this->path = implode(self::FORWARD_SLASH, $values);
 
         return new self($this->buildUrl());
     }
@@ -143,7 +143,7 @@ class Url implements StringInterface
      */
     private function extractUrlParts($value)
     {
-        $urlParts = parse_url($value);
+        $urlParts = parse_url($value ?? '');
 
         $this->scheme = isset($urlParts['scheme']) ? $urlParts['scheme'] : '';
         $this->host   = isset($urlParts['host']) ? $urlParts['host'] : '';
