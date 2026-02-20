@@ -26,6 +26,10 @@ class Birthday
         if ($year > $currentYear || ($year + 130 < $currentYear)) {
             throw new InvalidBirthdayException($year);
         }
+        $year = (int) $year;
+        $month = (int) $month;
+        $day = (int) $day;
+
         if (checkdate($month, $day, $year) === false) {
             $month = 1;
             $day = 1;

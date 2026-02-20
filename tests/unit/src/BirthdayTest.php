@@ -75,9 +75,17 @@ class BirthdayTest extends \PHPUnit\Framework\TestCase {
     public function testMakeFromString()
     {
         $birthdayString = '1986-10-19';
-        $birthday       = Birthday::makeFromString($birthdayString);
-        
+        $birthday = Birthday::makeFromString($birthdayString);
+
         $this->assertInstanceOf(Birthday::class, $birthday);
         $this->assertEquals($birthdayString, $birthday->format());
+    }
+
+    public function testMakeFromShortString()
+    {
+        $birthday = new Birthday(1986, null, null);
+
+        $this->assertInstanceOf(Birthday::class, $birthday);
+        $this->assertEquals('1986-01-01', $birthday->format());
     }
 }
