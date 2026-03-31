@@ -9,6 +9,10 @@ class Currency
     private $value;
 
     private $currencyMap = [
+        'BRL' => [
+            'title' => 'Brazilian real',
+            'symbol' => 'R$'
+        ],
         'EUR' => [
             'title' => 'Euro',
             'symbol' => '€'
